@@ -1,0 +1,33 @@
+{
+  "name": "live-stream-radio-nightbot-api",
+  "version": "1.0.0",
+  "description": "Node / Express / Mongo stack for integrating live-stream-radio with Nightbot via YouTube. Includes voting system with request system planned.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PerryRylance/live-stream-radio-nightbot-api.git"
+  },
+  "keywords": [
+    "live",
+    "stream",
+    "radio",
+    "nightbot",
+    "api",
+    "vote",
+    "request"
+  ],
+  "author": "Perry Rylance",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PerryRylance/live-stream-radio-nightbot-api/issues"
+  },
+  "homepage": "https://github.com/PerryRylance/live-stream-radio-nightbot-api#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.1"
+  }
+}
