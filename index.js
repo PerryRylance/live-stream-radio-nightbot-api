@@ -4,8 +4,8 @@ const express = require('express');
 // Import Body parser
 const bodyParser = require('body-parser');
 
-// Import Mongoose
-const mongoose = require('mongoose');
+require('dotenv').config();
+require("./src/db");
 
 // Initialise the app
 const app = express();
@@ -20,16 +20,6 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-// Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/live-stream-radio', { useNewUrlParser: true });
-var db = mongoose.connection;
-
-// Added check for DB connection
-if (!db)
-	console.log("Error connecting db")
-else
-	console.log("Db connected successfully")
-
 // Setup server port
 var port = process.env.PORT || 8080;
 
@@ -38,5 +28,5 @@ app.use('/api', routes);
 
 // Launch app to listen to specified port
 app.listen(port, function () {
-	console.log("Running RestHub on port " + port);
+	console.log("Running service on port " + port);
 });
