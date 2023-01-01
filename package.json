@@ -30,7 +30,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "lsr-wrapper": "^2.2.2",
-    "mongoose": "^6.8.1",
-    "query-string": "^8.1.0"
+    "query-string": "^8.1.0",
+    "sqlite3": "^5.1.4"
   }
 }

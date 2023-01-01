@@ -1,4 +1,4 @@
-const controller = require('./votes/controller');
+const controller = require('./votes/controller').default;
 
 // Initialize express router
 const router = require('express').Router();
@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
 // Contact routes
 router
 	.route('/votes')
-    .get(controller.index);
+    .get(controller.get);
 
 // Export API routes
 module.exports = router;

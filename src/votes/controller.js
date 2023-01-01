@@ -1,19 +1,9 @@
-const model = require("./model");
 const qstr = require("querystring");
 var LiveStreamRadio = require('lsr-wrapper');
+const db = require("../db").default;
 
-// Handle index actions
-exports.index = function (req, res) {
-
-    model.get(async function (err, models) {
-
-        if (err)
-            return res
-				.status(500)
-				.json({
-					status: "error",
-					message: err,
-				});
+const controller = {
+	get: async (req, res, next) => {
 
 		// NB: Check for secret key
 		if(!("key" in req.query))
@@ -109,18 +99,45 @@ exports.index = function (req, res) {
 				});
 
 		const song = history[ history.length - 1 ];
+		
+		// TODO: Error handling please, currently just dumps to the console
+		db.serialize(() => {
 
-		const query = { file: song.audio.path, name: user.displayName };
-		const update = { $set: { ...query, type: req.query.type }};
-		const options = { upsert: true };
+			let stmt;
 
-		await model.collection.updateOne(query, update, options);
+			stmt = db.prepare("DELETE FROM votes WHERE file = ? AND name = ?");
+			stmt.run(song.audio.path, user.displayName);
+
+			stmt = db.prepare("INSERT INTO votes (file, name, type, created_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)");
+			stmt.run(song.audio.path, user.displayName, req.query.type);
+
+		});
 
 		// NB: Success message
 		return res.json({
 			status: "success",
 			message: "Vote recorded successfully"
-		});      
+		});
+
+	}
+}
+
+exports.default = controller;
+
+// Handle index actions
+/*exports.index = function (req, res) {
+
+    model.get(async function (err, models) {
+
+        if (err)
+            return res
+				.status(500)
+				.json({
+					status: "error",
+					message: err,
+				});
+
+		 
 
     });
-};
+};*/

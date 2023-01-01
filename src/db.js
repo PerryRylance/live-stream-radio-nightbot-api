@@ -1,14 +1,11 @@
-// Import Mongoose
-const mongoose = require('mongoose');
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./db/station.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, err => {
 
-// Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/live-stream-radio', { useNewUrlParser: true });
-var db = mongoose.connection;
+	if(!err)
+		return; // NB: All OK
+	
+	throw err;
 
-// Added check for DB connection
-if (!db)
-	console.log("Error connecting db")
-else
-	console.log("Db connected successfully");
+});
 
 exports.default = db;
