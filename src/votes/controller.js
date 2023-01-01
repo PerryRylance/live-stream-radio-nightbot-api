@@ -123,21 +123,3 @@ const controller = {
 }
 
 exports.default = controller;
-
-// Handle index actions
-/*exports.index = function (req, res) {
-
-    model.get(async function (err, models) {
-
-        if (err)
-            return res
-				.status(500)
-				.json({
-					status: "error",
-					message: err,
-				});
-
-		 
-
-    });
-};*/
