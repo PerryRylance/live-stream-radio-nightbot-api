@@ -114,10 +114,7 @@ const controller = {
 		});
 
 		// NB: Success message
-		return res.json({
-			status: "success",
-			message: "Vote recorded successfully"
-		});
+		return res.send("Thank you, your vote has been recorded! " + String.fromCodePoint(0x1F916));
 
 	}
 }
